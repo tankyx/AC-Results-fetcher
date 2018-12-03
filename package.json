@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "beautify-scrollbar": "^1.0.8",
+    "v2-table": "^3.0.3",
     "vue": "^2.5.17",
     "vue-grid-data": "^1.4.92",
     "vue-router": "^3.0.1"
