@@ -8,15 +8,6 @@ import V2Table from 'v2-table';
 Vue.config.productionTip = false;
 Vue.use(V2Table)
 
-var track = new Vue({
-  data: {
-    name: ''
-  },
-  template: '<div>{{ message }}</div>'
-})
-
-track.name = "Rainbow Road"
-
 new Vue({
   router,
   render: h => h(App),
