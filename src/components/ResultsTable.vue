@@ -1,7 +1,7 @@
 <template>
   <div class='parent flex-parent'>
     <div class='child flex-child'>
-      <v2-table :data="list" border>
+      <v2-table :data="result1" border>
         <v2-table-column label="Nom" prop="name"></v2-table-column>
         <v2-table-column label="Temps" prop="laptime"></v2-table-column>
         <v2-table-column label="Voiture" prop="car"></v2-table-column>
@@ -15,7 +15,7 @@
       </v2-table>
     </div>
     <div class='child flex-child'>
-      <v2-table :data="list" border>
+      <v2-table :data="result2" border>
         <v2-table-column label="Nom" prop="name"></v2-table-column>
         <v2-table-column label="Temps" prop="laptime"></v2-table-column>
         <v2-table-column label="Voiture" prop="car"></v2-table-column>
@@ -29,7 +29,7 @@
       </v2-table>
     </div>
     <div class='child flex-child'>
-      <v2-table :data="list" border>
+      <v2-table :data="result3" border>
         <v2-table-column label="Nom" prop="name"></v2-table-column>
         <v2-table-column label="Temps" prop="laptime"></v2-table-column>
         <v2-table-column label="Voiture" prop="car"></v2-table-column>
@@ -50,12 +50,26 @@
     name: 'ResultsTable',
     data () {
       return {
-        list: [{
-          name: 'Tutu',
-          laptime: '1\'28"50',
-          car: 'Tata Nano',
-          ranking: require('../assets/Gold.png')
-        }]
+        result1: [],
+        result2: [],
+        result3: []
+      }
+    },
+    created: function()
+    {
+      this.fetchResults();
+    },
+    methods: {
+      fetchResults() {
+
+        console.log("Fetchin results");
+
+        var data_results =  { name: 'Tutu',
+                    laptime: '1\'28"50',
+                    car: 'Tata Nano',
+                    ranking: require('../assets/Gold.png') };
+
+        this.result1[0] = data_results;
       }
     }
   }
