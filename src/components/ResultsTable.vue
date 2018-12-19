@@ -60,34 +60,18 @@
       this.fetchResults();
     },
     methods: {
-      fetchResults() {
+      async fetchResults() {
 
         console.log("Fetchin results");
 
        let url = 'http://127.0.0.1:8080/results';
-
-        fetch(url)
-        .then(
-          function(response) {
-            if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-              response.status);
-              return;
-            }
-
-            // Examine the text in the response
-            response.json().then(function(data) {
-              let parsed_data = JSON.parse(data);
-              console.log(parsed_data.TrackName);
-              // Peut pas modifier les result1 - 2 - 3 ici
-            });
-          }
-        )
-        .catch(err => { throw err });
-
-
-        console.log("Ping")
-      }
+       try {
+        const response = await axios.get('/user?ID=12345');
+        console.log(response.TrackName);
+       } catch (error) {
+         console.log('rip: ', error)
+          return;
+       }
     }
   }
 
