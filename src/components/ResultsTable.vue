@@ -64,9 +64,9 @@
 
         console.log("Fetchin results");
 
-       let url = 'http://127.0.0.1:8080/results';
+       let url = '/results';
        try {
-        const response = await axios.get('/user?ID=12345');
+        const response = await axios.get(url);
         console.log(response.TrackName);
        } catch (error) {
          console.log('rip: ', error)
