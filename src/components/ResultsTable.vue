@@ -64,15 +64,33 @@
 
         console.log("Fetchin results");
 
-        var data_results =  { name: 'Tutu',
-                    laptime: '1\'28"50',
-                    car: 'Tata Nano',
-                    ranking: require('../assets/Gold.png') };
+       let url = 'http://127.0.0.1:8080/results';
 
-        this.result1[0] = data_results;
+        fetch(url)
+        .then(
+          function(response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+              return;
+            }
+
+            // Examine the text in the response
+            response.json().then(function(data) {
+              let parsed_data = JSON.parse(data);
+              console.log(parsed_data.TrackName);
+              // Peut pas modifier les result1 - 2 - 3 ici
+            });
+          }
+        )
+        .catch(err => { throw err });
+
+
+        console.log("Ping")
       }
     }
   }
+
 </script>
 
 <style>
