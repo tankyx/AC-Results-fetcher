@@ -46,6 +46,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   export default {
     name: 'ResultsTable',
     data () {
@@ -66,14 +67,20 @@
 
        let url = '/results';
        try {
+        console.log("Wow");
+        this.result1[0] = { name: 'Tutu',
+                    laptime: '1\'28"50',
+                    car: 'Tata Nano',
+                    ranking: require('../assets/Gold.png')
+                  };
         const response = await axios.get(url);
-        console.log(response.TrackName);
        } catch (error) {
          console.log('rip: ', error)
           return;
        }
     }
   }
+}
 
 </script>
 
