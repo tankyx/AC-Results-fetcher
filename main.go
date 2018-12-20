@@ -46,6 +46,58 @@ type session struct {
 	Results   []tResults `json:"Result"`
 }
 
+func getResults3(w http.ResponseWriter, r *http.Request) {
+	dirname := "./results"
+
+	files, err := ioutil.ReadDir(dirname)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	i := 2
+
+	filename := dirname + "/" + files[len(files)-1-i].Name()
+	fmt.Println(filename)
+	content, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	js, err := json.Marshal(string(content))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
+
+func getResults2(w http.ResponseWriter, r *http.Request) {
+	dirname := "./results"
+
+	files, err := ioutil.ReadDir(dirname)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	i := 1
+
+	filename := dirname + "/" + files[len(files)-1-i].Name()
+	fmt.Println(filename)
+	content, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	js, err := json.Marshal(string(content))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
+
 func getResults(w http.ResponseWriter, r *http.Request) {
 	dirname := "./results"
 
@@ -54,28 +106,22 @@ func getResults(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	for i := range files {
-		if i >= 1 {
-			break
-		}
-		//fmt.Println(files[len(files)-1-i].Name())
+	i := 0
 
-		filename := dirname + "/" + files[len(files)-1-i].Name()
-		fmt.Println(filename)
-		content, err := ioutil.ReadFile(filename)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(string(content))
-		js, err := json.Marshal(string(content))
-
-		if err != nil {
-			log.Fatal(err)
-		}
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(js)
+	filename := dirname + "/" + files[len(files)-1-i].Name()
+	fmt.Println(filename)
+	content, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
 	}
+	js, err := json.Marshal(string(content))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
 }
 
 func getGoldResults(w http.ResponseWriter, r *http.Request) {
@@ -85,5 +131,7 @@ func getGoldResults(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./dist")))
 	http.HandleFunc("/results", getResults)
+	http.HandleFunc("/results2", getResults2)
+	http.HandleFunc("/results3", getResults3)
 	http.ListenAndServe(":8080", nil)
 }
