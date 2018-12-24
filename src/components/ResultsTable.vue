@@ -90,7 +90,7 @@
         }
         } catch (error) {
           console.log('rip: ', error)
-           return;
+          return;
         }
 
   }
